@@ -66,6 +66,7 @@ import com.employeemgmt.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collector;
 
 @Service
 public class EmployeeService {
@@ -96,13 +97,16 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-//    public List<Employee> searchEmployee(String searchText) {
-//        searchText = "%" + searchText + "%";
-//        return employeeRepository.findEmployeeBySearchText(searchText);
-//    }
+
     
     public List<Employee> searchEmployee(String searchText) {
         return employeeRepository.findEmployeeBySearchText(searchText);
+        
+    }
+    
+    // ✅ New: Filter by department and optional min/max salary
+    public List<Employee> filterEmployees(String department, Double minSalary, Double maxSalary) {
+        return employeeRepository.filterEmployees(department, minSalary, maxSalary);
     }
 
 }
